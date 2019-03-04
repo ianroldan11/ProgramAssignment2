@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Query Suggestion</title>
+        <!-- css bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="basiccss.css">
+        <!-- jQuery javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="querysuggestion.js"></script>
+		
+    </head>
+    <body>
+		<div class="container whitepace"></div>
+    	<div class="container">
+            <form action="">
+                <div class="form-group">
+                    <!-- Label -->
+                    <label for="textbox"><h1 class="display-2" id="titlelabel">Enter text below:</h1></label>
+                    <!-- Textbox -->
+                    <input type="text" class="form-control" id="textbox" name="inputstring" autocomplete="off" autofocus placeholder="Please wait a moment while the data loads..." disabled="enabled">
+                    <!-- Table for Results -->
+                    <table class="table">
+                        <tbody id="tablebody"></tbody>
+                    </table>
+                </div>
+                <!-- Loading Spinner -->
+                <div id="loadingspinner" class="spinner-border text-danger m-3"></div>
+            </form>    		
+    	</div>   	       
+    </body>
+</html>

@@ -1,0 +1,47 @@
+﻿div {
+    text-align: center;
+}
+
+html, body {
+    
+    min-height: 100%;
+    max-height: auto;
+}
+
+body{    
+    background-image: linear-gradient(to bottom right, rgb(234, 250, 250), rgb(24, 103, 103));
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.whitepace {
+    height: 20vw;
+}
+
+
+
+#titlelabel {
+    color: rgb(204, 204, 255);
+    text-shadow: -2px 4px rgb(115, 115, 115);
+}
+
+#textbox {
+    color: rgb(77, 166, 255);
+    height: auto;
+    font-size: 24px;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    text-align: left;
+}
+
+tr:nth-child(odd){
+    background-color: rgb(230, 255, 255);
+}
+
+tr:nth-child(even){
+    background-color: rgb(236, 255, 230);
+}
+
