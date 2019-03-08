@@ -75,6 +75,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Trie.cs" />
+    <Compile Include="TrieNode.cs" />
+    <Compile Include="StringPopularity.cs" />
+    <Compile Include="Sorter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -13,7 +13,6 @@ namespace BlobManager
     class BlobWebService
     {
         public static readonly string fileDirectory = Directory.GetCurrentDirectory() + "/DataFiles/";
-        public static readonly string dataSetFileName = "wikidataset";
         
         [WebMethod]
         public string DownloadFromAzureBlob(string fileNameToDownload)
@@ -67,25 +66,8 @@ namespace BlobManager
                 return "specified file does not exist";
             }
         }
-
-        [WebMethod]
-        public List<string> ReadFromFile(string fileName)
-        {
-            Directory.CreateDirectory(fileDirectory);
-            List<string> matches = new List<string>();
-            StreamReader streamReader = new StreamReader(fileDirectory + fileName);
-            string line = streamReader.ReadLine();
-            while (line != null)
-            {
-                matches.Add(line);
-                //Read the next line
-                line = streamReader.ReadLine();
-            }
-
-            return matches;
-        }
         
-        [WebMethod]
+        
         public void WriteToFile(bool willOverwrite, string fileName, List<string> dataToWrite)
         {
             Directory.CreateDirectory(fileDirectory);

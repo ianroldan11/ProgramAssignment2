@@ -1,22 +1,19 @@
 ﻿<Properties StartupConfiguration="{2E46EF8A-5126-485B-BE08-EC767093A910}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="QuerySuggestionModule/TrieManager.asmx">
+  <MonoDevelop.Ide.Workbench ActiveDocument="QuerySuggestionModule/Trie.cs">
     <Files>
-      <File FileName="QuerySuggestionModule/index.html" Line="16" Column="29" />
-      <File FileName="QuerySuggestionModule/querysuggestion.js" Line="10" Column="41" />
-      <File FileName="QuerySuggestionModule/TrieManager.asmx" Line="9" Column="1" />
-      <File FileName="QuerySuggestionModule/BlobManager.asmx" Line="19" Column="70" />
+      <File FileName="QuerySuggestionModule/index.html" Line="21" Column="13" />
+      <File FileName="QuerySuggestionModule/TrieManager.asmx" Line="13" Column="1" />
+      <File FileName="QuerySuggestionModule/querysuggestion.js" Line="64" Column="4" />
+      <File FileName="QuerySuggestionModule/Trie.cs" Line="296" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="QuerySuggestionModule" expanded="True">
-            <Node name="QuerySuggestionModule" expanded="True" selected="True" />
+            <Node name="QuerySuggestionModule" expanded="True">
+              <Node name="Trie.cs" selected="True" />
+            </Node>
           </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="QuerySuggestionModule" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
