@@ -8,7 +8,7 @@ namespace QuerySuggestionModule
         public Sorter()
         {
         }
-
+        // sorts by popCount first, then by alphabetical order
         public static List<StringPopularity> PopCountSort(List<StringPopularity> stringPopularities)
         {
             stringPopularities.Sort((x, y) =>

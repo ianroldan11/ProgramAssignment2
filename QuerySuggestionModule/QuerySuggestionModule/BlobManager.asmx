@@ -14,18 +14,22 @@ namespace BlobManager
     {
         public static readonly string fileDirectory = Directory.GetCurrentDirectory() + "/DataFiles/";
         
+        // downloads file from blob storage
         [WebMethod]
         public string DownloadFromAzureBlob(string fileNameToDownload)
         {
+            // check if file does not yet exist
             if (!File.Exists(fileDirectory + fileNameToDownload)){
+                // creates directory if it does not yet exist
                 Directory.CreateDirectory(fileDirectory);
-        
+                // get blob container
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(System.Configuration.ConfigurationManager.AppSettings["StorageConnectionString"]);
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
                 CloudBlobContainer container = blobClient.GetContainerReference("wikipediablobcontainer");
-
+                // check if blob container exists
                 if (container.Exists())
                 {
+                    // download the file
                     CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileNameToDownload);
                     using (var fileStream = File.OpenWrite(fileDirectory + fileNameToDownload)){
                         blockBlob.DownloadToStream(fileStream);
@@ -41,19 +45,21 @@ namespace BlobManager
             
         }
         
+        // uploads file to blob storage
         [WebMethod]
         public string UploadToAzureBlob(string fileNameToUpload)
         {
-        
+            // check if file to be uploaded is present
             if (File.Exists(fileDirectory + fileNameToUpload)){
                 Directory.CreateDirectory(fileDirectory);
-            
+                // get blob container
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(System.Configuration.ConfigurationManager.AppSettings["StorageConnectionString"]);
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
                 CloudBlobContainer container = blobClient.GetContainerReference("wikipediablobcontainer");
-
+                // check if blob container exists
                 if (container.Exists())
-                {
+                {   
+                    // upload file
                     CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileNameToUpload);
                     using (var fileStream = File.OpenRead(fileDirectory + fileNameToUpload)){
                         blockBlob.UploadFromStream(fileStream);
@@ -67,6 +73,7 @@ namespace BlobManager
             }
         }
         
+        // Methods below will not be used for this project
         
         public void WriteToFile(bool willOverwrite, string fileName, List<string> dataToWrite)
         {

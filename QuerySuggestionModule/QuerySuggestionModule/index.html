@@ -16,7 +16,7 @@
 </head>
     <body>
 		<div class="container whitepace"></div>
-    	<div class="container">
+        <div class="container">
 
             <div class="form-group">
                 <!-- Label -->
@@ -25,18 +25,22 @@
                 <input type="text" class="form-control" id="textbox" name="inputstring" autocomplete="off" autofocus placeholder="Please wait a moment while the data loads..." disabled="enabled">
                 <!-- Table for Results -->
                 <table class="table">
+                    <!-- Results retrieved from local storage -->
                     <tbody id="recentstablebody"></tbody>
+                    <!-- Results retrieved with matches -->
                     <tbody id="tablebody"></tbody>
+                    <!-- Results retrieved with edit distance 2 -->
                     <tbody id="levtablebody"></tbody>
-                </table>                    
+                </table>
             </div>
+            <!-- container for alert notification after storing from local storage -->
             <div id="alertdisplay"></div>
             <!-- Loading Spinner -->
             <div id="loadingspinner">
                 <div class="spinner-border text-white m-3"></div>
-                <div class="text-white">Loading Data...</div>
+                <div class="text-white" id="loadingdetails">Loading Data...</div>
             </div>
 
-    	</div>   	       
+        </div>   	       
     </body>
 </html>

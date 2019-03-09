@@ -184,26 +184,37 @@ namespace QuerySuggestionModule
         public List<StringPopularity> LevenshteinSearchWord(string prefix, string word, TrieNode nodeToSearch)
         {
             List<StringPopularity> results = new List<StringPopularity>();
-                        
+            // make sure word to be search is not blank
             if (word.Length > 0)
             {
+                // all characters used for replacement
                 string allCharacters = "abcdefghijklmnopqrstuvwxyz_";
+                // loops for every character in the word to be searched
                 for (int i = 0; i < word.Length; i++)
                 {
+                    // creates string builder out of the word
                     StringBuilder sb = new StringBuilder(word);
+                    // substitute the character at index i of the string builder with every character listed in allCharacters
                     foreach (char character in allCharacters)
                     {
+                        // substitution
                         sb[i] = character;
+                        // representation of the new word created
                         string newWord = sb.ToString();
+                        // since edit distance is 2, nest another loop of character substitution
                         for (int j = 0; j < word.Length; j++)
                         {
+                            // code below follows the same process as above
                             StringBuilder newSb = new StringBuilder(newWord);
                             foreach (char character2 in allCharacters)
                             {                                
-                                newSb[j] = character2;                                
+                                newSb[j] = character2;
+                                // after double substitution, search the trie for the string created                              
                                 TrieNode trial = SearchWord(prefix, newSb.ToString(), nodeToSearch);
+                                // if a match is found
                                 if (trial != null && !word.Equals(newSb.ToString()))
                                 {
+                                    // add all StringPopularity object under that node to the list to be returned
                                     results.AddRange(GetAllWordsFromNode(trial, newSb.ToString()));
                                 }
                             }
@@ -212,7 +223,7 @@ namespace QuerySuggestionModule
                     }
                 }
             }
-
+            // sort results before returning
             return Sorter.PopCountSort(results);
 
         }
@@ -233,9 +244,11 @@ namespace QuerySuggestionModule
                 // loops through every string and check for prefix match
                 foreach (StringPopularity item in parentNode.listOfWords)
                 {
+                    // make sure item length is greater than the length of the word to be searched
                     if (item.val.Length >= rootWord.Length)
                     {
                         string itemSubString = item.val.Substring(0, rootWord.Length);
+                        // check if equal : case insensitive
                         if (itemSubString.ToLower().Equals(rootWord.ToLower()))
                         {
                             searchResults.Add(item);
@@ -261,7 +274,8 @@ namespace QuerySuggestionModule
             return Sorter.PopCountSort(searchResults);
         }
 
-        public StringPopularity GetNodeWithExactValue(TrieNode parentNode, string rootWord)
+        // returns the exact match from a node
+        public StringPopularity GetNodeWithExactValue(TrieNode parentNode, string rootWord, bool isCaseSensitive)
         {
             StringPopularity stringPopularity = null;
 
@@ -271,11 +285,22 @@ namespace QuerySuggestionModule
                 // loops through every string and check for prefix match
                 foreach (StringPopularity item in parentNode.listOfWords)
                 {
-                    if (item.val.Equals(rootWord))
+                    // check if case sensitive (used for exact searching i.e. clicking a row in the table)
+                    if (isCaseSensitive)
                     {
-                        return item;
+                        if (item.val.Equals(rootWord))
+                        {
+                            return item;
+                        }
                     }
-
+                    // check if case insensitive (used for blind searching i.e. user typing on a text box and pressing enter)
+                    else
+                    {
+                        if (item.val.ToLower().Equals(rootWord.ToLower()))
+                        {
+                            return item;
+                        }
+                    }
                 }
             }
 
@@ -293,13 +318,16 @@ namespace QuerySuggestionModule
             return stringPopularity;
         }
 
+        // adds popCount to the StringPopularity of the searched node
         public void AddPopCount(string wordToSearch)
         {
+            // searches for the node containing the string
             TrieNode targetNode = SearchWord("", wordToSearch, rootNode);
-
+            // if there is a match,
             if (targetNode != null)
             {
-                StringPopularity stringPopularity = GetNodeWithExactValue(targetNode, wordToSearch);
+                // increment its popCount
+                StringPopularity stringPopularity = GetNodeWithExactValue(targetNode, wordToSearch, true);
                 if (stringPopularity != null)
                 {
                     stringPopularity.popCount++;
